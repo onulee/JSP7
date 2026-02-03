@@ -47,8 +47,10 @@
 		  conn = ds.getConnection();
 		  out.println("db connection연결 1개 가져옴");
 		  // board out.println()
-		  query = "select * from board order by bno";
+		  query = "select * from board where btitle like ?";
 		  	pstmt = conn.prepareStatement(query);
+		  	String search = "ht";
+		  	pstmt.setString(1, "%"+search+"%");
 		  	rs = pstmt.executeQuery();
 		  	while(rs.next()){
 		  		bno = rs.getInt("bno");  //숫자

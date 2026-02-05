@@ -16,18 +16,21 @@ public class FController extends HttpServlet {
 		String viewPage = null;
 		
 		String uri = request.getRequestURI();          // /p0205_02/login.do
+		System.out.println("uri : "+uri);
 		String contextPath = request.getContextPath(); // /p0205_02
-		String com = uri.substring(contextPath.length()); // /login.do
+		System.out.println("contextPath : "+contextPath);
+		String fileName = uri.substring(contextPath.length()); // /login.do
+		System.out.println("fileName : "+fileName);
 		
-		if(com.equals("/login.do")) {
+		if(fileName.equals("/login.do")) {
 			response.sendRedirect("./login.jsp");
-		}else if(com.equals("/membership.do")) {
+		}else if(fileName.equals("/membership.do")) {
 			response.sendRedirect("./membership.jsp");
-		}else if(com.equals("/logout.do")) {
+		}else if(fileName.equals("/logout.do")) {
 			response.sendRedirect("./logout.jsp");
-		}else if(com.equals("/board.do")) {
+		}else if(fileName.equals("/board.do")) {
 			response.sendRedirect("./board.jsp");
-		}else if(com.equals("/member.do")) {
+		}else if(fileName.equals("/member.do")) {
 			response.sendRedirect("./member.jsp");
 		}
 		

@@ -1,11 +1,18 @@
 package com.java.www.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.java.www.service.BoardService;
+import com.java.www.service.BoardServiceImpl;
+import com.java.www.service.MemberService;
+import com.java.www.service.MemberServiceImpl;
 
 
 @WebServlet("*.do")
@@ -21,18 +28,28 @@ public class FController extends HttpServlet {
 		System.out.println("contextPath : "+contextPath);
 		String fileName = uri.substring(contextPath.length()); // /login.do
 		System.out.println("fileName : "+fileName);
+		MemberService mService = null;
+		BoardService bService = null;
 		
 		if(fileName.equals("/login.do")) {
-			response.sendRedirect("./login.jsp");
+			viewPage = "./login.jsp";
 		}else if(fileName.equals("/membership.do")) {
-			response.sendRedirect("./membership.jsp");
+			viewPage = "./membership.jsp";
 		}else if(fileName.equals("/logout.do")) {
-			response.sendRedirect("./logout.jsp");
+			viewPage = "./logout.jsp";
 		}else if(fileName.equals("/board.do")) {
-			response.sendRedirect("./board.jsp");
+			bService = new BoardServiceImpl();
+			bService.execute(request, response); //member모든정보
+			viewPage = "./board.jsp";
 		}else if(fileName.equals("/member.do")) {
-			response.sendRedirect("./member.jsp");
+			mService = new MemberServiceImpl();
+			mService.execute(request, response); //member모든정보
+			viewPage = "./member.jsp";
 		}
+		
+		// request의 데이터가 함께 포워드
+		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
+		dispatcher.forward(request, response);
 		
 	}
 	

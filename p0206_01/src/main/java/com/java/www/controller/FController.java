@@ -70,6 +70,11 @@ public class FController extends HttpServlet {
 	    	boardService.execute(request, response);
 	    	viewPage = "./board/board.jsp";
 	    	break;
+	    case "/boardView.do": //전체게시글리스트
+	    	//boardService = new BListServiceImpl();
+	    	//boardService.execute(request, response);
+	    	viewPage = "./board/boardView.jsp";
+	    	break;
 	    	
 	    }//switch
 	    

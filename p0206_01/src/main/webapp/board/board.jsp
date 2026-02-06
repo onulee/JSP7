@@ -248,7 +248,7 @@
         <c:forEach var="board" items="${list}">
         <tr>
           <td>${board.bno }</td>
-          <td class="title"><a href="./boardView.jsp">[공지] ${board.btitle }</a></td>
+          <td class="title"><a href="./boardView.do">[공지] ${board.btitle }</a></td>
           <td>${board.id }</td>
           <td class="date">${board.bdate }</td>
           <td class="views">${board.bhit }</td>

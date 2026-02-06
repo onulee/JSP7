@@ -9,6 +9,12 @@
 	</head>
 	<body>
 	  <h2>메인페이지</h2>
+	  <c:if test="${session_id == null }">
+		  <h3>로그인을 하셔야 글쓰기가 가능합니다.</h3>
+	  </c:if>
+	  <c:if test="${session_id != null }">
+	  	  <h3>${session_id } 님 환영합니다.</h3>
+	  </c:if>
 	  <ul>
 	    <!-- 로그인전 -->
 	    <c:if test="${session_id == null }">

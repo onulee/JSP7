@@ -32,7 +32,7 @@ public class FController extends HttpServlet {
 		BoardService bService = null;
 		
 		if(fileName.equals("/login.do")) {
-			viewPage = "./login.jsp";
+			viewPage = "./member/login.jsp";
 		}else if(fileName.equals("/membership.do")) {
 			viewPage = "./membership.jsp";
 		}else if(fileName.equals("/logout.do")) {

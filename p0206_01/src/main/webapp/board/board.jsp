@@ -118,6 +118,26 @@
       color: #888;
       font-size: 13px;
   }
+  /* Buttons */
+    .detail-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+    }
+    .detail-buttons a {
+      width:120px;
+      text-align:center;
+      margin-top:20px;
+      text-decoration: none;
+      padding: 8px 18px;
+      font-size: 14px;
+      color: white;
+      background-color: #035fe0;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
 
   /* Pagination & Search Styling */
   .board-footer {
@@ -259,6 +279,9 @@
         
       </tbody>
     </table>
+    <div class="detail-buttons">
+      <a href="./boardWrite.do">글쓰기</a>
+    </div>
     <!-- Pagination & Search -->
     <div class="board-footer" >
         <div class="pagination">

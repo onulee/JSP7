@@ -281,10 +281,13 @@
     <div class="detail-content">
       ${board.bcontent }
     </div>
+    <div class="detail-info">
+      <div>파일첨부: ${board.bfile}</div>
+    </div>
     <div class="detail-buttons">
       <a href="board.do">목록으로</a>
-      <a href="./boardUpdate.do">수정</a>
-      <button id="deleteBtn" onclick="deleteBtn()">삭제</button>
+      <a href="./boardUpdate.do?bno=${board.bno}">수정</a>
+      <button id="deleteBtn">삭제</button>
     </div>
   </div>
 
@@ -342,8 +345,8 @@
       modalOverlay.style.display = 'none';
       // 실제 삭제 로직 삽입 위치
       alert('게시글이 삭제되었습니다.');
-      // 예: 목록 페이지로 이동
-      window.location.href = 'board.html';
+      // 삭제 페이지로 이동
+      window.location.href = 'boardDelete.do?bno=${board.bno}';
     });
 
     // 모달 바깥 클릭 시 닫기
@@ -382,9 +385,10 @@
       newComment.style.padding = '12px 15px';
       newComment.style.borderBottom = '1px solid #e0e0e0';
 
+      // `` 자바스크립트 변수를 문자열안에서 호출 태그가 el태그 겹침.
       newComment.innerHTML = `
-        <strong>${escapeHtml(name)}</strong> <span>(${formattedDate})</span>
-        <p>${escapeHtml(text)}</p>
+        <strong>\${escapeHtml(name)}</strong> <span>(\${formattedDate})</span>
+        <p>\${escapeHtml(text)}</p>
         <div class="comment-buttons">
           <button class="edit-btn">수정</button>
           <button class="delete-btn">삭제</button>

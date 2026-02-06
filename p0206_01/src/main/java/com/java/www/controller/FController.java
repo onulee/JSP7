@@ -13,7 +13,10 @@ import javax.servlet.http.HttpSession;
 
 import com.java.www.dto.BoardDto;
 import com.java.www.dto.MemberDto;
+import com.java.www.service.BDeleteServiceImpl;
+import com.java.www.service.BInsertServiceImpl;
 import com.java.www.service.BListServiceImpl;
+import com.java.www.service.BUpdateServiceImpl;
 import com.java.www.service.BViewServiceImpl;
 import com.java.www.service.BoardService;
 import com.java.www.service.MInsertServiceImpl;
@@ -35,30 +38,30 @@ public class FController extends HttpServlet {
 	    BoardService boardService = null;
 	    
 	    switch(fileName) {
-	    case "/index.do":
+	    case "/index.do":  //페이지호출
 	    	viewPage = "./index.jsp";
 	    	break;
-	    case "/login.do":
+	    case "/login.do":   //페이지호출
 	    	viewPage = "./member/login.jsp";
 	    	break;
-	    case "/doLogin.do":
+	    case "/doLogin.do": //id,pw확인
 	    	//다른클래스를 호출하려면 객체선언이 되어야 함.
 	    	memberService = new MLoginServiceImpl();
 	    	memberService.execute(request, response);
 	    	viewPage = "./member/doLogin.jsp";
 	    	break;
-	    case "/logout.do":
+	    case "/logout.do":  //페이지호출
 	    	HttpSession session = request.getSession();
 	    	session.invalidate();
 	    	request.setAttribute("logout", 1);
 	    	viewPage = "./member/doLogout.jsp";
 	    	break;
-	    case "/member.do": //전체회원리스트
+	    case "/member.do": //전체회원리스트 
 	    	memberService = new MListServiceImpl();
 	    	memberService.execute(request, response);
 	    	viewPage = "./member/member.jsp";
 	    	break;	
-	    case "/membership.do":   //회원가입페이지
+	    case "/membership.do":   //회원가입페이지 호출
 	    	viewPage = "./member/membership.jsp";
 	    	break;
 	    case "/doMembership.do": //회원가입저장
@@ -66,15 +69,40 @@ public class FController extends HttpServlet {
 	    	memberService.execute(request, response);
 	    	viewPage = "./member/membership2.jsp";
 	    	break;
-	    case "/board.do": //전체게시글리스트
+	    case "/board.do": //전체게시글리스트 selectAll()
 	    	boardService = new BListServiceImpl();
 	    	boardService.execute(request, response);
 	    	viewPage = "./board/board.jsp";
 	    	break;
-	    case "/boardView.do": //전체게시글리스트
+	    case "/boardView.do": //게시글1개 selectOne()
 	    	boardService = new BViewServiceImpl();
 	    	boardService.execute(request, response);
 	    	viewPage = "./board/boardView.jsp";
+	    	break;
+	    case "/boardWrite.do": //게시글쓰기 페이지호출
+	    	viewPage = "./board/boardWrite.jsp";
+	    	break;
+	    case "/doBoardWrite.do": //게시글쓰기 저장 insert()
+	    	boardService = new BInsertServiceImpl();
+	    	boardService.execute(request, response);
+	    	viewPage = "./board/flag.jsp";
+	    	break;
+	    case "/boardDelete.do": //게시글 삭제 delete()
+	    	boardService = new BDeleteServiceImpl();
+	    	boardService.execute(request, response);
+	    	//System.out.println("boardDelete bno : "+request.getParameter("bno"));
+	    	viewPage = "./board/flag.jsp";
+	    	break;
+	    case "/boardUpdate.do": //게시글 수정페이지호출 selectOne()
+	    	boardService = new BViewServiceImpl();
+	    	boardService.execute(request, response);
+	    	//System.out.println("boardUpdate bno : "+request.getParameter("bno"));
+	    	viewPage = "./board/boardUpdate.jsp";
+	    	break;
+	    case "/doBoardUpdate.do": //게시글 수정저장 update()
+	    	boardService = new BUpdateServiceImpl();
+	    	boardService.execute(request, response);
+	    	viewPage = "./board/flag.jsp";
 	    	break;
 	    	
 	    }//switch

@@ -29,11 +29,80 @@ public class BoardDao {
 	List<BoardDto> list;
 	BoardDto bdto;
 	
+	// 게시글 수정
+	public void boardUpdate(int bno, String btitle, String bcontent, 
+			String bfile) {
+		conn = getConnection();
+		try {
+			String query = "update board set btitle=?,bcontent=?,bfile=? where bno=?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, btitle);
+			pstmt.setString(2, bcontent);
+			pstmt.setString(3, bfile);
+			pstmt.setInt(4, bno);
+			pstmt.executeUpdate();  // insert,update,delete->executeUpdate() / select->executeQuery()
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) {e2.printStackTrace();}
+		}
+		
+	}//
+	
+	
+	
+	// 게시글 삭제
+	public void boardDelete(int bno) {
+		conn = getConnection();
+		try {
+			String query = "delete board where bno=?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bno);
+			pstmt.executeUpdate();  // insert,update,delete->executeUpdate() / select->executeQuery()
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) {e2.printStackTrace();}
+		}
+		
+	}//
+	
+	// 게시글 저장
+	public void boardInsert(String id, String btitle, String bcontent) {
+		conn = getConnection();
+		try {
+			String query = "insert into board values ( board_seq.nextval,?,?,?,board_seq.currval,0,0,0,'',sysdate )";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, btitle);
+			pstmt.setString(2, bcontent);
+			pstmt.setString(3, id);
+			pstmt.executeUpdate();  // insert,update,delete->executeUpdate() / select->executeQuery()
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) {e2.printStackTrace();}
+		}
+	}//
+	
+	
+	
 	// 게시글1개 메소드
 	public BoardDto selectOne(int bno) {
 		conn = getConnection();
-		String query = "select * from board where bno=?";
 		try {
+			String query = "select * from board where bno=?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, bno);
 			rs = pstmt.executeQuery();
@@ -108,13 +177,12 @@ public class BoardDao {
 		return connection; 
 	}
 
-
 	
 
 
 
-
 	
+
 	
 	
 }//class

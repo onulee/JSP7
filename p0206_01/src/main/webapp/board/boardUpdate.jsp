@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VLAST Shop - 글쓰기</title>
+  <title>VLAST Shop - 글수정</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -128,17 +128,21 @@
     </div>
   </div>
 
-  <!-- 글쓰기 폼 -->
+  <!-- 글수정 폼 -->
   <div class="write-container">
-    <div class="write-title">게시글 작성</div>
-    <form action="./doBoardWrite.do" name="frm" method="post" class="write-form" id="writeForm">
-      <input type="text" name="id" id="writer" placeholder="작성자" maxlength="20" required />
-      <input type="text" name="btitle" id="title" placeholder="제목" maxlength="100" required />
-      <textarea name="bcontent" id="content" placeholder="내용을 입력하세요." maxlength="2000" required></textarea>
+    <div class="write-title">게시글 수정</div>
+    <form action="./doBoardUpdate.do" name="frm" method="post" class="write-form" id="writeForm">
+      <input type="hidden" name="bno" value="${board.bno}" />
+      <input type="hidden" name="oldBFile" value="${board.bfile}" />
+      <input type="text" name="id" value="${board.id}" id="writer" placeholder="작성자" maxlength="20" required />
+      <input type="text" name="btitle" value="${board.btitle}" id="title" placeholder="제목" maxlength="100" required />
+      <textarea name="bcontent" id="content" placeholder="내용을 입력하세요." maxlength="2000" required>
+${board.bcontent}      
+      </textarea>
       <input type="file" name="bfile" />
 
       <div class="write-buttons">
-        <button type="submit">등록</button>
+        <button type="submit">수정</button>
         <button type="button" class="cancel" onclick="history.back()">취소</button>
       </div>
     </form>

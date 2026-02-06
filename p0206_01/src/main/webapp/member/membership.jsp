@@ -237,7 +237,7 @@
       <a href="#">회원가입</a> |
       <a href="#">로그인</a> |
       <a href="#">주문조회</a> |
-      <a href="/p0206_01/">HOME</a>
+      <a href="/p0206_01/">홈으로</a>
     </div>
     <div class="icons">
       <i class="fas fa-search"></i>

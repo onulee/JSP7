@@ -29,6 +29,39 @@ public class BoardDao {
 	List<BoardDto> list;
 	BoardDto bdto;
 	
+	// 게시글1개 메소드
+	public BoardDto selectOne(int bno) {
+		conn = getConnection();
+		String query = "select * from board where bno=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bno);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				bno = rs.getInt("bno");
+				btitle = rs.getString("btitle");
+				bcontent = rs.getString("bcontent");
+				id = rs.getString("id");
+				bgroup = rs.getInt("bgroup");
+				bstep = rs.getInt("bstep");
+				bindent = rs.getInt("bindent");
+				bhit = rs.getInt("bhit");
+				bfile = rs.getString("bfile");
+				bdate = rs.getTimestamp("bdate");
+				bdto = new BoardDto(bno, btitle, bcontent, id, bgroup, bstep, bindent, bhit, bfile, bdate);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) {e2.printStackTrace();}
+		}
+		return bdto;
+	}//
+	
 	// 전체게시글리스트 메소드
 	public List<BoardDto> selectAll() {
 		List<BoardDto> list = new ArrayList<BoardDto>();
@@ -74,6 +107,9 @@ public class BoardDao {
 		} catch (Exception e) {e.printStackTrace();}
 		return connection; 
 	}
+
+
+	
 
 
 

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.java.www.dto.BoardDto;
 import com.java.www.dto.MemberDto;
 import com.java.www.service.BListServiceImpl;
+import com.java.www.service.BViewServiceImpl;
 import com.java.www.service.BoardService;
 import com.java.www.service.MInsertServiceImpl;
 import com.java.www.service.MListServiceImpl;
@@ -71,8 +72,8 @@ public class FController extends HttpServlet {
 	    	viewPage = "./board/board.jsp";
 	    	break;
 	    case "/boardView.do": //전체게시글리스트
-	    	//boardService = new BListServiceImpl();
-	    	//boardService.execute(request, response);
+	    	boardService = new BViewServiceImpl();
+	    	boardService.execute(request, response);
 	    	viewPage = "./board/boardView.jsp";
 	    	break;
 	    	

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -258,7 +260,7 @@
       <a href="#">회원가입</a> |
       <a href="#">로그인</a> |
       <a href="#">주문조회</a> |
-      <a href="#">최근본상품</a>
+      <a href="/p0206_01/">홈으로</a>
     </div>
     <div class="icons">
       <i class="fas fa-search"></i>
@@ -269,24 +271,20 @@
 
   <!-- Detail View -->
   <div class="detail-container">
-    <div class="detail-title">[공지] 추석 연휴 배송 안내</div>
+    <div class="detail-title">[공지] ${board.btitle}</div>
     <div class="detail-info">
-      <div>작성자: 관리자</div>
-      <div>작성일: 2025-09-05</div>
-      <div>조회수: 123</div>
+      <div>작성자: ${board.id}</div>
+      <div>작성일: 
+      <fmt:formatDate value="${board.bdate}" pattern="YYYY-MM-dd"/></div>
+      <div>조회수: ${board.bhit }</div>
     </div>
     <div class="detail-content">
-      안녕하세요, 고객님.<br><br>
-      추석 연휴 기간 동안의 배송 일정에 대해 안내드립니다.<br>
-      9월 15일부터 9월 18일까지는 배송이 지연될 수 있으니 참고 부탁드립니다.<br><br>
-      풍성한 한가위 보내시길 바랍니다.<br><br>
-      감사합니다.<br>
-      VLAST Shop 운영팀 드림.
+      ${board.bcontent }
     </div>
     <div class="detail-buttons">
-      <a href="board.html">목록으로</a>
-      <a href="#">수정</a>
-      <button id="deleteBtn">삭제</button>
+      <a href="board.do">목록으로</a>
+      <a href="./boardUpdate.do">수정</a>
+      <button id="deleteBtn" onclick="deleteBtn()">삭제</button>
     </div>
   </div>
 

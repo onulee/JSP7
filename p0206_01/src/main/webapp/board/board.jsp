@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -209,7 +211,7 @@
       <a href="#"><i class="fa-regular fa-chess-queen"></i> 회원가입</a> |
       <a href="#">로그인</a> |
       <a href="#">주문조회</a> |
-      <a href="/p0206_01/">HOME</a>
+      <a href="/p0206_01/">홈으로</a>
     </div>
     <div class="icons">
       <i class="fas fa-search"></i>
@@ -248,9 +250,9 @@
         <c:forEach var="board" items="${list}">
         <tr>
           <td>${board.bno }</td>
-          <td class="title"><a href="./boardView.do">[공지] ${board.btitle }</a></td>
+          <td class="title"><a href="./boardView.do?bno=${board.bno}">[공지] ${board.btitle }</a></td>
           <td>${board.id }</td>
-          <td class="date">${board.bdate }</td>
+          <td class="date"><fmt:formatDate value="${board.bdate}" pattern="YYYY-MM-dd"/></td>
           <td class="views">${board.bhit }</td>
         </tr>
         </c:forEach>
